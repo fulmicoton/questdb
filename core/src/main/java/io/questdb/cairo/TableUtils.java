@@ -46,6 +46,8 @@ public final class TableUtils {
     public static final int INITIAL_TXN = 0;
     public static final int NULL_LEN = -1;
     public static final int ANY_TABLE_VERSION = -1;
+    public static final String FILE_SUFFIX_I = ".i";
+    public static final String FILE_SUFFIX_D = ".d";
     static final int MIN_INDEX_VALUE_BLOCK_SIZE = Numbers.ceilPow2(4);
     static final byte TODO_RESTORE_META = 2;
     static final byte TODO_TRUNCATE = 1;
@@ -96,7 +98,6 @@ public final class TableUtils {
     static final long META_OFFSET_COLUMN_TYPES = 128;
     static final int META_FLAG_BIT_INDEXED = 1;
     static final int META_FLAG_BIT_SEQUENTIAL = 1 << 1;
-
     static final String TODO_FILE_NAME = "_todo";
     private static final int MIN_SYMBOL_CAPACITY = 2;
     private static final int MAX_SYMBOL_CAPACITY = Numbers.ceilPow2(Integer.MAX_VALUE);
@@ -469,7 +470,7 @@ public final class TableUtils {
     }
 
     static LPSZ dFile(Path path, CharSequence columnName) {
-        return path.concat(columnName).put(".d").$();
+        return path.concat(columnName).put(FILE_SUFFIX_D).$();
     }
 
     static LPSZ topFile(Path path, CharSequence columnName) {
@@ -477,7 +478,7 @@ public final class TableUtils {
     }
 
     static LPSZ iFile(Path path, CharSequence columnName) {
-        return path.concat(columnName).put(".i").$();
+        return path.concat(columnName).put(FILE_SUFFIX_I).$();
     }
 
     public static int getColumnType(ReadOnlyColumn metaMem, int columnIndex) {
